@@ -1,11 +1,17 @@
-S = input()
+S = list(map(int, input()))
 n = len(S)
 
 
 ans = 0
-for i in range(1 << n-1):
-    for j in range(n-1):
-        if i & (1 << j):
-            # プラスを入れる
-            pass
-
+for bit in range(1 << n-1):
+    tmp = 0
+    for i in range(n-1):
+        tmp *= 10
+        tmp += S[i]
+        if (bit & (1 << i)):
+            ans += tmp
+            tmp = 0
+    tmp *= 10
+    tmp += S[n-1]
+    ans += tmp
+print(ans)
