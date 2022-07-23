@@ -1,17 +1,15 @@
-S = list(map(int, input()))
+S = list(input())
 n = len(S)
 
 
 ans = 0
 for bit in range(1 << n-1):
-    tmp = 0
+    # 式
+    formula = S[0]
     for i in range(n-1):
-        tmp *= 10
-        tmp += S[i]
         if (bit & (1 << i)):
-            ans += tmp
-            tmp = 0
-    tmp *= 10
-    tmp += S[n-1]
-    ans += tmp
+            formula += "+"+S[i+1]
+        else:
+            formula += S[i+1]
+    ans += eval(formula)
 print(ans)
